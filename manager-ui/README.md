@@ -2,7 +2,17 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+
+
 ## Available Scripts
+
+npm install @mui/material @emotion/react @emotion/styled
+npm install @reduxjs/toolkit react-redux
+npm install react-router-dom
+npm install @reduxjs/toolkit react-redux react-router-dom
+npm install axios
+npm install react-beautiful-dnd (drag‑and‑drop )
+
 
 In the project directory, you can run:
 
@@ -28,6 +38,7 @@ The build is minified and the filenames include the hashes.\
 Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+
 
 ### `npm run eject`
 
