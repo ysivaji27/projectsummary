@@ -6,15 +6,15 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Available Scripts
 
-npm install @mui/material @emotion/react @emotion/styled
-npm install @reduxjs/toolkit react-redux
-npm install react-router-dom
-npm install @reduxjs/toolkit react-redux react-router-dom
-npm install axios
-npm install react-beautiful-dnd (drag‑and‑drop )
-
-
 In the project directory, you can run:
+
+npm install @mui/material @emotion/react @emotion/styled \
+npm install @reduxjs/toolkit react-redux \
+npm install react-router-dom \
+npm install @reduxjs/toolkit react-redux react-router-dom \
+npm install axios \
+npm install react-beautiful-dnd (drag‑and‑drop ) 
+
 
 ### `npm start`
 
