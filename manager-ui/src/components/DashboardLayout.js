@@ -7,6 +7,7 @@ import { useNavigate, Outlet } from 'react-router-dom';
 import ProjectModal from './ProjectModal';
 import { useDispatch } from 'react-redux';
 import { setSelectedProject } from '../features/projects/projectSlice';
+import api from "../api/axios";
 
 const drawerWidth = 240;
 
@@ -17,12 +18,8 @@ const DashboardLayout = () => {
   const dispatch = useDispatch();
 
   const fetchProjects = async () => {
-    const token = localStorage.getItem('token');
-    const res = await fetch('http://localhost:8080/api/projects', {
-      headers: { Authorization: `Bearer ${token}` }
-    });
-    const data = await res.json();
-    setProjects(data);
+    const res1 = await api.get(`/projects`);
+    setProjects(res1.data);
   };
 
   useEffect(() => {
@@ -39,7 +36,7 @@ const DashboardLayout = () => {
       {/* Top App Bar */}
       <AppBar position="fixed" sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}>
         <Toolbar sx={{ justifyContent: 'space-between' }}>
-          <Typography variant="h6">Manager Dashboard</Typography>
+          <Typography variant="h6" gutterBottom>Manager Dashboard</Typography>
           <Button color="inherit" onClick={handleLogout}>Logout</Button>
         </Toolbar>
       </AppBar>

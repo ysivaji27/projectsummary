@@ -24,12 +24,12 @@ public class ActivityController {
         return activityService.getRecentActivitiesForProject(projectId);
     }
 
-//    @GetMapping
-//    public Page<Activity> getActivityPage(@RequestParam(defaultValue = "0") int page,
-//                                          @RequestParam(defaultValue = "5") int size) {
-//        Pageable pageable = PageRequest.of(page, size, Sort.by("timestamp").descending());
-//        return activityService.getActivityPage(pageable);
-//    }
+    @GetMapping("/list")
+    public Page<Activity> getActivityPage(@RequestParam(defaultValue = "0") int page,
+                                          @RequestParam(defaultValue = "5") int size) {
+        Pageable pageable = PageRequest.of(page, size, Sort.by("timestamp").descending());
+        return activityService.getActivityPage(pageable);
+    }
 
 }
 

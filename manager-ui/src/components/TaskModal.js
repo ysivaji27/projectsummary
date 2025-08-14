@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import api from "../api/axios"; 
 import {
   Dialog, DialogTitle, DialogContent, DialogActions,
   TextField, Button, MenuItem
@@ -14,15 +15,7 @@ const TaskModal = ({ open, handleClose, projectId, onTaskAdded }) => {
   };
 
   const handleSubmit = async () => {
-    const token = localStorage.getItem('token');
-    await fetch(`http://localhost:8080/api/tasks?projectId=${projectId}`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`
-      },
-      body: JSON.stringify(task)
-    });
+    await api.put(`/tasks?projectId=${projectId}`, task);
     handleClose();
     onTaskAdded();
   };

@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
-
+import api from "../../api/axios";
 // Load token from localStorage (if present)
 const token = localStorage.getItem('token') || null;
 
@@ -9,7 +9,8 @@ export const loginUser = createAsyncThunk(
   'auth/loginUser',
   async (credentials, { rejectWithValue }) => {
     try {
-      const response = await axios.post('http://localhost:8080/api/auth/login', credentials);
+      const response = await api.post("/auth/login", credentials);
+      //const response = await axios.post('http://localhost:8080/api/auth/login', credentials);
       return response.data.token;
     } catch (err) {
       return rejectWithValue(err.response?.data || 'Login failed');

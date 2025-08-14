@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import api from "../api/axios";
+
 import {
   Dialog, DialogTitle, DialogContent, DialogActions,
   TextField, Button
@@ -12,15 +14,7 @@ const ProjectModal = ({ open, handleClose, onProjectAdded }) => {
   };
 
   const handleSubmit = async () => {
-    const token = localStorage.getItem('token');
-    await fetch('http://localhost:8080/api/projects', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`
-      },
-      body: JSON.stringify(project)
-    });
+    await api.put(`/projects`,project);
     handleClose();
     onProjectAdded(); // callback to refresh list
   };

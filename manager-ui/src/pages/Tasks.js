@@ -4,6 +4,7 @@ import { Typography, Paper, Button, Box, Divider, Alert, Stack} from '@mui/mater
 import TaskModal from '../components/TaskModal';
 import TaskStatusPieChart from '../components/charts/TaskStatusPieChart';
 import ActivityFeed from '../components/ActivityFeed';
+import api from "../api/axios";
 
 const Tasks = () => {
   const project = useSelector(state => state.project.selectedProject);
@@ -14,23 +15,15 @@ const Tasks = () => {
   // Fetch tasks
   const fetchTasks = async () => {
     if (!project) return;
-    const token = localStorage.getItem('token');
-    const res = await fetch(`http://localhost:8080/api/tasks?projectId=${project.id}`, {
-      headers: { Authorization: `Bearer ${token}` }
-    });
-    const data = await res.json();
-    setTasks(data);
+    const res = await api.get(`/tasks?projectId=${project.id}`);
+    setTasks(res.data);
   };
 
   // Fetch activity feed
   const fetchActivities = async () => {
     if (!project) return;
-    const token = localStorage.getItem('token');
-    const res = await fetch(`http://localhost:8080/api/activity?projectId=${project.id}`, {
-      headers: { Authorization: `Bearer ${token}` }
-    });
-    const data = await res.json();
-    setActivities(data);
+    const res = await api.get(`/activity?projectId=${project.id}`);
+    setActivities(res.data);
   };
 
   useEffect(() => {
@@ -55,18 +48,10 @@ const Tasks = () => {
   };
 
   const updateTaskStatus = async (task, newStatus) => {
-  const token = localStorage.getItem('token');
-  await fetch(`http://localhost:8080/api/tasks/${task.id}`, {
-    method: 'PUT',
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${token}`
-    },
-    body: JSON.stringify({ ...task, status: newStatus })
-  });
-  fetchTasks();
-  fetchActivities();
-};
+    await api.put(`/tasks/${task.id}`, {...task,status: newStatus });
+    fetchTasks();
+    fetchActivities();
+  };
 
   return (
     <Box sx={{ display: 'flex', gap: 2 }}>
